@@ -15,7 +15,7 @@
 //! The following are benchmark results against [`Fral`], [`im::ConsList`], and [`im::List`] (`im`
 //! version `9.0.0`) with the `get`, `cons`, and `uncons` operations:
 //!
-//! ```
+//! ```plain
 //! test get_fral           ... bench:      35,129 ns/iter (+/- 162)
 //! test get_im_conslist    ... bench:  37,545,651 ns/iter (+/- 1,089,092)
 //! test get_im_list        ... bench: 452,968,129 ns/iter (+/- 14,544,638)
