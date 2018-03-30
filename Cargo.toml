@@ -1,0 +1,18 @@
+[package]
+name = "fral"
+version = "1.0.0"
+authors = ["Lucas Morales <lucas@lucasem.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/lucasem/fral"
+homepage = "https://github.com/lucasem/fral"
+documentation = "https://docs.rs/fral"
+description = "Functional random-access lists."
+keywords = ["list", "fast", "cons", "persistent", "immutable"]
+categories = ["data-structures"]
+
+[dependencies]
+
+[dev-dependencies]
+rand = "0.4"
+im = "9.0"
