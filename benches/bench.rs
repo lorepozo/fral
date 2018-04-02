@@ -52,6 +52,7 @@ macro_rules! matrix_uncons {
 macro_rules! matrix_get {
     ($name:ident, $new:expr, $cons:ident, $get:expr) => {
         #[bench]
+        #[cfg_attr(feature = "cargo-clippy", allow(redundant_closure_call))]
         fn $name(b: &mut Bencher) {
             let mut rng = rand::IsaacRng::new_unseeded();
             let between = Range::new(0, 2048);
