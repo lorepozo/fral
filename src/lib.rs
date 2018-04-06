@@ -12,19 +12,25 @@
 //!
 //! ### Comparison with `im`
 //!
-//! The following are benchmark results against [`Fral`], [`im::ConsList`], and [`im::List`] (`im`
-//! version `9.0.0`) with the `get`, `cons`, and `uncons` operations:
+//! The following are benchmark results against [`Fral`], [`im::Vector`], [`im::CatList`], and
+//! [`im::ConsList`] (`im` version `10.0.0`) with the `get`, `cons`, and `uncons` operations (which
+//! are `push_front` and `pop_front` for `im::Vector`). Results are sorted by efficiency:
 //!
 //! ```plain
-//! test get_fral           ... bench:      35,129 ns/iter (+/- 162)
-//! test get_im_conslist    ... bench:  37,545,651 ns/iter (+/- 1,089,092)
-//! test get_im_list        ... bench: 452,968,129 ns/iter (+/- 14,544,638)
-//! test cons_fral          ... bench:     295,407 ns/iter (+/- 414)
-//! test cons_im_conslist   ... bench:     172,356 ns/iter (+/- 437)
-//! test cons_im_list       ... bench:     580,119 ns/iter (+/- 14,259)
-//! test uncons_fral        ... bench:          51 ns/iter (+/- 0)
+//! test get_im_vector      ... bench:      25,968 ns/iter (+/- 113)
+//! test get_fral           ... bench:      37,356 ns/iter (+/- 124)
+//! test get_im_catlist     ... bench:  15,397,279 ns/iter (+/- 375,877)
+//! test get_im_conslist    ... bench:  36,834,300 ns/iter (+/- 1,073,303)
+//!
+//! test cons_im_conslist   ... bench:     170,603 ns/iter (+/- 461)
+//! test cons_fral          ... bench:     294,475 ns/iter (+/- 195)
+//! test cons_im_catlist    ... bench:     641,423 ns/iter (+/- 2,625)
+//! test cons_im_vector     ... bench:     949,886 ns/iter (+/- 6,663)
+//!
 //! test uncons_im_conslist ... bench:          17 ns/iter (+/- 0)
-//! test uncons_im_list     ... bench:         438 ns/iter (+/- 1)
+//! test uncons_fral        ... bench:          52 ns/iter (+/- 0)
+//! test uncons_im_catlist  ... bench:         149 ns/iter (+/- 0)
+//! test uncons_im_vector   ... bench:         454 ns/iter (+/- 2)
 //! ```
 //!
 //! # Examples
@@ -73,8 +79,9 @@
 //! [`Rc`]: https://doc.rust-lang.org/stable/std/rc/struct.Rc.html
 //! [`Fral`]: struct.Fral.html
 //! [`rc::Fral`]: rc/struct.Fral.html
-//! [`im::ConsList`]: https://docs.rs/im/~9.0/im/conslist/struct.ConsList.html
-//! [`im::List`]: https://docs.rs/im/~9.0/im/list/struct.List.html
+//! [`im::Vector`]: https://docs.rs/im/~10.0/im/vector/struct.Vector.html
+//! [`im::CatList`]: https://docs.rs/im/~10.0/im/catlist/struct.CatList.html
+//! [`im::ConsList`]: https://docs.rs/im/~10.0/im/conslist/struct.ConsList.html
 
 mod arc;
 pub mod rc;

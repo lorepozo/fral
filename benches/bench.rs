@@ -6,13 +6,13 @@ extern crate rand;
 extern crate test;
 
 use fral::Fral;
-use im::{ConsList, List};
+use im::{CatList, ConsList, Vector};
 use rand::Rng;
 use rand::distributions::{IndependentSample, Range};
 use test::Bencher;
 
 macro_rules! matrix_cons {
-    ($name:ident, $new:expr, $cons:ident) => {
+    ($name: ident, $new: expr, $cons: ident) => {
         #[bench]
         fn $name(b: &mut Bencher) {
             let mut rng = rand::IsaacRng::new_unseeded();
@@ -27,7 +27,7 @@ macro_rules! matrix_cons {
 }
 
 macro_rules! matrix_uncons {
-    ($name:ident, $new:expr, $cons:ident, $uncons:ident) => {
+    ($name: ident, $new: expr, $cons: ident, $uncons: ident) => {
         #[bench]
         fn $name(b: &mut Bencher) {
             let mut rng = rand::IsaacRng::new_unseeded();
@@ -38,7 +38,7 @@ macro_rules! matrix_uncons {
             let reset = v.clone();
             b.iter(|| {
                 let mut _total = 0;
-                if let Some((car, cdr)) = v.uncons() {
+                if let Some((car, cdr)) = v.$uncons() {
                     _total += *car;
                     v = cdr;
                 } else {
@@ -50,7 +50,7 @@ macro_rules! matrix_uncons {
 }
 
 macro_rules! matrix_get {
-    ($name:ident, $new:expr, $cons:ident, $get:expr) => {
+    ($name: ident, $new: expr, $cons: ident, $get: expr) => {
         #[bench]
         #[cfg_attr(feature = "cargo-clippy", allow(redundant_closure_call))]
         fn $name(b: &mut Bencher) {
@@ -87,27 +87,36 @@ macro_rules! matrix {
 }
 
 matrix!(
-    im_list_cons,
-    im_list_uncons,
-    im_list_get,
-    List::new(),
-    cons,
-    uncons,
-    |x: &List<_>, n| *x.iter().nth(n).unwrap()
+    cons_im_vector,
+    uncons_im_vector,
+    get_im_vector,
+    Vector::new(),
+    push_front,
+    pop_front,
+    |x: &Vector<_>, n| *x.get(n).unwrap()
 );
 matrix!(
-    im_conslist_cons,
-    im_conslist_uncons,
-    im_conslist_get,
+    cons_im_catlist,
+    uncons_im_catlist,
+    get_im_catlist,
+    CatList::new(),
+    cons,
+    uncons,
+    |x: &CatList<_>, n| *x.iter().nth(n).unwrap()
+);
+matrix!(
+    cons_im_conslist,
+    uncons_im_conslist,
+    get_im_conslist,
     ConsList::new(),
     cons,
     uncons,
     |x: &ConsList<_>, n| *x.iter().nth(n).unwrap()
 );
 matrix!(
-    fral_cons,
-    fral_uncons,
-    fral_get,
+    cons_fral,
+    uncons_fral,
+    get_fral,
     Fral::new(),
     cons,
     uncons,

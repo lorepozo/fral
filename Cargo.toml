@@ -15,4 +15,4 @@ categories = ["data-structures"]
 
 [dev-dependencies]
 rand = "0.4"
-im = "9.0"
+im = "10.0"
